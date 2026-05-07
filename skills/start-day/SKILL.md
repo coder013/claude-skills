@@ -146,9 +146,7 @@ Read 도구로 두 파일을 읽는다.
 
 ### 2-3. 어제 daily에서 추출 (YESTERDAY가 있을 때만)
 
-**추출 1 — 어제 TODO 전체**
-
-`#### ✅ To Do` ~ 다음 `---` 직전까지의 내용을 그대로 가져온다. (빈 줄, 내부 구조 포함)
+**추출 1 — 생략** (Yesterday's Work는 링크만 남기므로 추출 불필요)
 
 **추출 2 — 후속 과제** (우선순위 순으로 탐색)
 
@@ -162,14 +160,14 @@ Read 도구로 두 파일을 읽는다.
 
 Edit 도구로 오늘 daily를 수정한다.
 
-**수정 1 — Yesterday's Work 섹션 삽입**
+**수정 1 — Yesterday's Work 섹션 삽입 (링크만)**
 
-`#### ✅ To Do` 바로 위에 삽입한다:
+`#### ✅ To Do` 바로 위에 삽입한다. 어제 내용 전체 복사 대신 링크만 남겨 검색 노이즈를 줄인다:
 
 ```
 #### 📋 Yesterday's Work
 
-<어제 TODO 섹션 내용 그대로>
+→ [[<YESTERDAY>]]
 
 ---
 ```
@@ -201,11 +199,11 @@ filepath = "/Users/jrlee/dev/repo/coder013/devlog/Daily/<TODAY>.md"
 with open(filepath, "r", encoding="utf-8") as f:
     content = f.read()
 
-# 수정 1: Yesterday's Work 삽입
+# 수정 1: Yesterday's Work 삽입 (링크만)
 insert_before = "#### ✅ To Do"
 yesterday_block = """#### 📋 Yesterday's Work
 
-<어제 TODO 내용>
+→ [[<YESTERDAY>]]
 
 ---
 """
@@ -231,11 +229,11 @@ print("✅ 파일 수정 완료")
 EOF
 ```
 
-`<TODAY>`, `<어제 TODO 내용>`, `<후속 과제>` 는 실제 값으로 치환 후 실행한다.
+`<TODAY>`, `<YESTERDAY>`, `<후속 과제>` 는 실제 값으로 치환 후 실행한다.
 
 ### 2-5. 완료 보고
 
-- YESTERDAY 날짜 및 반영된 TODO 항목 수
+- YESTERDAY 링크 삽입 여부
 - 삽입된 후속 과제 수 (출처: 기술부채 / 진행상황 / 미완료 TODO 중 어느 경로인지도 표기)
 - 오늘 daily 파일 경로
 - YESTERDAY가 없었으면 "이전 Daily Note를 찾지 못해 오늘 노트만 생성했습니다" 보고
